@@ -1,0 +1,7 @@
+{% load static %}
+
+<!-- O Django procura em: tarefas/static/tarefas/css/style.css -->
+<link rel="stylesheet" href="{% static 'tarefas/css/style.css' %}">
+
+<!-- Herança de template dentro da subpasta do app -->
+{% extends 'tarefas/base.html' %}

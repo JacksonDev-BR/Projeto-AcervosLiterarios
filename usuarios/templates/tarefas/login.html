@@ -1,0 +1,1823 @@
+{% load static %}
+
+<!-- O Django procura em: tarefas/static/tarefas/css/style.css -->
+<link rel="stylesheet" href="{% static 'tarefas/css/style.css' %}">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IFRN | Login Administrativo</title>
+
+  <style>
+
+    /* =========================================================
+       CONFIGURAÇÕES GERAIS
+    ========================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --azul: #0874c7;
+      --azul-escuro: #075b9c;
+
+      --verde: #08b765;
+      --verde-escuro: #08783f;
+
+      --amarelo: #f2dc00;
+
+      --cinza-fundo: #f3f5f7;
+      --cinza-borda: #d5d9dd;
+      --cinza-texto: #777;
+
+      --vermelho: #e53935;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background: #eef1f4;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 25px;
+    }
+
+
+    /* =========================================================
+       CONTAINER PRINCIPAL
+    ========================================================== */
+
+    .login-container {
+
+      width: 1100px;
+      max-width: 100%;
+
+      min-height: 650px;
+
+      background: white;
+
+      display: grid;
+
+      grid-template-columns: 45% 55%;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* =========================================================
+       LADO ESQUERDO
+    ========================================================== */
+
+    .branding {
+
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 45px;
+
+      color: white;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      background:
+        linear-gradient(
+          145deg,
+          #5b66d5 0%,
+          #236f91 45%,
+          #08783f 100%
+        );
+    }
+
+
+    /* Círculos decorativos */
+
+    .branding::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      right: -180px;
+      top: -120px;
+    }
+
+
+    .branding::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,0.1);
+
+      left: -170px;
+      bottom: -130px;
+    }
+
+
+    .brand-content,
+    .institution-info {
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    /* =========================================================
+       LOGO
+    ========================================================== */
+
+    .brand-logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      margin-bottom: 70px;
+    }
+
+
+    .brand-mark {
+
+      width: 35px;
+      height: 35px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00ff39 0 23%,
+          transparent 23% 36%,
+          #00ff39 36% 51%,
+          transparent 51% 64%,
+          #00ff39 64% 100%
+        );
+
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        72% 100%,
+        72% 20%,
+        57% 20%,
+        57% 100%,
+        40% 100%,
+        40% 55%,
+        26% 55%,
+        26% 100%,
+        0 100%
+      );
+    }
+
+
+    .brand-logo span {
+
+      font-size: 37px;
+
+      font-weight: bold;
+
+      letter-spacing: -1.5px;
+    }
+
+
+    /* =========================================================
+       TEXTO INSTITUCIONAL
+    ========================================================== */
+
+    .branding h1 {
+
+      max-width: 420px;
+
+      font-size: 34px;
+
+      line-height: 1.1;
+
+      margin-bottom: 20px;
+    }
+
+
+    .branding p {
+
+      max-width: 410px;
+
+      color: rgba(255,255,255,0.9);
+
+      font-size: 15px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       BADGE
+    ========================================================== */
+
+    .access-badge {
+
+      display: inline-flex;
+
+      width: fit-content;
+
+      margin-top: 28px;
+
+      padding: 9px 17px;
+
+      border-radius: 20px;
+
+      background: var(--amarelo);
+
+      color: #111;
+
+      font-size: 12px;
+
+      font-weight: bold;
+    }
+
+
+    /* =========================================================
+       INFORMAÇÕES INSTITUCIONAIS
+    ========================================================== */
+
+    .institution-info {
+
+      color: rgba(255,255,255,0.7);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       LADO DIREITO
+    ========================================================== */
+
+    .form-area {
+
+      position: relative;
+
+      background: #fff;
+
+      padding: 50px 70px 70px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+    }
+
+
+    .login-box {
+
+      width: 420px;
+
+      max-width: 100%;
+    }
+
+
+    /* =========================================================
+       CABEÇALHO DO FORMULÁRIO
+    ========================================================== */
+
+    .form-header {
+
+      margin-bottom: 28px;
+    }
+
+
+    .form-header h2 {
+
+      font-size: 30px;
+
+      color: #171717;
+
+      margin-bottom: 8px;
+    }
+
+
+    .form-header p {
+
+      color: var(--cinza-texto);
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================================
+       ALERTA
+    ========================================================== */
+
+    .error-alert {
+
+      display: none;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 12px 14px;
+
+      margin-bottom: 18px;
+
+      border-radius: 9px;
+
+      background: #ffebeb;
+
+      border-left: 4px solid var(--vermelho);
+
+      color: #b71c1c;
+
+      font-size: 12px;
+
+      line-height: 1.4;
+    }
+
+
+    .error-alert.show {
+
+      display: flex;
+
+      animation: aparecerAlerta 0.25s ease;
+    }
+
+
+    @keyframes aparecerAlerta {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(-8px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+    }
+
+
+    .alert-icon {
+
+      width: 20px;
+      height: 20px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      border-radius: 50%;
+
+      background: var(--vermelho);
+
+      color: white;
+
+      font-weight: bold;
+    }
+
+
+    /* =========================================================
+       CAMPOS
+    ========================================================== */
+
+    .field {
+
+      margin-bottom: 19px;
+    }
+
+
+    .field label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      color: #272727;
+    }
+
+
+    .input-wrapper {
+
+      position: relative;
+    }
+
+
+    .input-icon {
+
+      position: absolute;
+
+      left: 14px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #777;
+
+      font-size: 17px;
+
+      pointer-events: none;
+    }
+
+
+    .input-wrapper input {
+
+      width: 100%;
+
+      height: 49px;
+
+      border: 1px solid var(--cinza-borda);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      padding: 0 45px;
+
+      background: #fafafa;
+
+      color: #222;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+
+    .input-wrapper input:focus {
+
+      background: white;
+
+      border-color: var(--azul);
+
+      box-shadow:
+        0 0 0 3px rgba(8,116,199,0.12);
+    }
+
+
+    .input-wrapper input.invalid {
+
+      border-color: var(--vermelho);
+
+      box-shadow:
+        0 0 0 3px rgba(229,57,53,0.08);
+    }
+
+
+    .input-wrapper input.valid {
+
+      border-color: var(--verde);
+    }
+
+
+    .field-hint {
+
+      margin-top: 5px;
+
+      color: #999;
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================================
+       BOTÃO MOSTRAR SENHA
+    ========================================================== */
+
+    .password-toggle {
+
+      position: absolute;
+
+      right: 7px;
+
+      top: 7px;
+
+      width: 35px;
+      height: 35px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: transparent;
+
+      color: #666;
+
+      cursor: pointer;
+
+      font-size: 16px;
+
+      transition: 0.2s;
+    }
+
+
+    .password-toggle:hover {
+
+      background: #eaf2f7;
+
+      color: var(--azul);
+    }
+
+
+    /* =========================================================
+       OPÇÕES
+    ========================================================== */
+
+    .form-options {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin: 5px 0 25px;
+    }
+
+
+    .remember {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: #555;
+
+      font-size: 11px;
+
+      cursor: pointer;
+    }
+
+
+    .remember input {
+
+      width: 15px;
+      height: 15px;
+
+      accent-color: var(--azul);
+
+      cursor: pointer;
+    }
+
+
+    .forgot-password {
+
+      color: var(--azul);
+
+      font-size: 11px;
+
+      font-weight: bold;
+
+      text-decoration: none;
+    }
+
+
+    .forgot-password:hover {
+
+      text-decoration: underline;
+    }
+
+
+    /* =========================================================
+       BOTÃO LOGIN
+    ========================================================== */
+
+    .login-button {
+
+      width: 100%;
+
+      height: 50px;
+
+      border: none;
+
+      border-radius: 9px;
+
+      background: var(--azul);
+
+      color: white;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 5px 12px rgba(8,116,199,0.25);
+
+      transition: 0.2s;
+    }
+
+
+    .login-button:hover {
+
+      background: var(--azul-escuro);
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 7px 15px rgba(8,116,199,0.3);
+    }
+
+
+    .login-button:active {
+
+      transform: translateY(1px);
+    }
+
+
+    .login-button.loading {
+
+      opacity: 0.7;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================================
+       SEGURANÇA
+    ========================================================== */
+
+    .security-note {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      margin-top: 20px;
+
+      color: #888;
+
+      font-size: 10px;
+    }
+
+
+    .security-icon {
+
+      color: var(--verde);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================== */
+
+    .footer {
+
+      position: absolute;
+
+      bottom: 15px;
+
+      left: 0;
+      right: 0;
+
+      text-align: center;
+
+      color: #999;
+
+      font-size: 9px;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================== */
+
+    .toast {
+
+      position: fixed;
+
+      top: 22px;
+
+      right: 22px;
+
+      z-index: 9999;
+
+      min-width: 280px;
+
+      max-width: 390px;
+
+      padding: 14px 16px;
+
+      background: white;
+
+      border-radius: 9px;
+
+      box-shadow:
+        0 9px 25px rgba(0,0,0,0.18);
+
+      border-left: 4px solid var(--vermelho);
+
+      color: #333;
+
+      font-size: 12px;
+
+      display: none;
+    }
+
+
+    .toast.show {
+
+      display: block;
+
+      animation: toastEntrada 0.25s ease;
+    }
+
+
+    @keyframes toastEntrada {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateX(20px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+      }
+    }
+
+
+    /* =========================================================
+       RESPONSIVIDADE
+    ========================================================== */
+
+    @media (max-width: 800px) {
+
+      body {
+
+        padding: 0;
+      }
+
+
+      .login-container {
+
+        min-height: 100vh;
+
+        border-radius: 0;
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .branding {
+
+        min-height: 320px;
+
+        padding: 30px;
+      }
+
+
+      .brand-logo {
+
+        margin-bottom: 35px;
+      }
+
+
+      .branding h1 {
+
+        font-size: 27px;
+      }
+
+
+      .branding p {
+
+        font-size: 13px;
+      }
+
+
+      .institution-info {
+
+        display: none;
+      }
+
+
+      .form-area {
+
+        padding: 40px 30px 70px;
+      }
+    }
+
+
+    @media (max-width: 430px) {
+
+      .branding {
+
+        min-height: 280px;
+      }
+
+
+      .form-area {
+
+        padding: 30px 20px 70px;
+      }
+
+
+      .form-options {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+      }
+
+
+      .toast {
+
+        left: 15px;
+
+        right: 15px;
+
+        min-width: 0;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ========================================================
+       CONTAINER PRINCIPAL
+  ========================================================= -->
+
+  <main class="login-container">
+
+
+    <!-- ======================================================
+         LADO ESQUERDO / IFRN
+    ======================================================= -->
+
+    <section class="branding">
+
+
+      <div class="brand-content">
+
+
+        <!-- LOGO -->
+
+        <div class="brand-logo">
+
+          <div class="brand-mark"></div>
+
+          <span>IFRN</span>
+
+        </div>
+
+
+        <!-- TÍTULO -->
+
+        <h1>
+
+          Sistema de Gestão
+          de Acervos PNLD
+
+        </h1>
+
+
+        <!-- DESCRIÇÃO -->
+
+        <p>
+
+          Acesso administrativo e docente
+          para gerenciamento, acompanhamento
+          e controle dos acervos de livros.
+
+        </p>
+
+
+        <!-- BADGE -->
+
+        <div class="access-badge">
+
+          Acesso Docente / Administrador
+
+        </div>
+
+
+      </div>
+
+
+      <!-- INFORMAÇÕES -->
+
+      <div class="institution-info">
+
+        Instituto Federal de Educação,
+        Ciência e Tecnologia do Rio Grande do Norte
+
+        <br>
+
+        Sistema interno de gerenciamento de acervos
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ======================================================
+         LADO DIREITO / LOGIN
+    ======================================================= -->
+
+    <section class="form-area">
+
+
+      <form
+        id="loginForm"
+        class="login-box"
+        novalidate
+      >
+
+
+        <!-- CABEÇALHO -->
+
+        <div class="form-header">
+
+          <h2>
+
+            Bem-vindo!
+
+          </h2>
+
+
+          <p>
+
+            Entre com sua matrícula ou
+            e-mail institucional para acessar
+            o painel.
+
+          </p>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             ALERTA
+        =================================================== -->
+
+        <div
+          id="errorAlert"
+          class="error-alert"
+          role="alert"
+          aria-live="polite"
+        >
+
+          <span class="alert-icon">
+
+            !
+
+          </span>
+
+
+          <span>
+
+            Credenciais inválidas.
+            Verifique sua matrícula/e-mail
+            e tente novamente.
+
+          </span>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MATRÍCULA
+        =================================================== -->
+
+        <div class="field">
+
+
+          <label for="identifier">
+
+            Matrícula / E-mail Institucional
+
+          </label>
+
+
+          <div class="input-wrapper">
+
+
+            <span
+              class="input-icon"
+              aria-hidden="true"
+            >
+
+              👤
+
+            </span>
+
+
+            <input
+              id="identifier"
+              name="identifier"
+              type="text"
+              placeholder="Matrícula ou nome@ifrn.edu.br"
+              autocomplete="username"
+              required
+            >
+
+
+          </div>
+
+
+          <div class="field-hint">
+
+            Utilize sua matrícula ou e-mail institucional.
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             SENHA
+        =================================================== -->
+
+        <div class="field">
+
+
+          <label for="password">
+
+            Senha
+
+          </label>
+
+
+          <div class="input-wrapper">
+
+
+            <span
+              class="input-icon"
+              aria-hidden="true"
+            >
+
+              🔒
+
+            </span>
+
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              id="togglePassword"
+              class="password-toggle"
+              type="button"
+              aria-label="Exibir senha"
+              title="Exibir senha"
+            >
+
+              👁
+
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             LEMBRAR / ESQUECI
+        =================================================== -->
+
+        <div class="form-options">
+
+
+          <label class="remember">
+
+
+            <input
+              id="remember"
+              type="checkbox"
+            >
+
+
+            <span>
+
+              Lembrar minhas credenciais
+
+            </span>
+
+
+          </label>
+
+
+
+          <a
+            href="#"
+            id="forgotPassword"
+            class="forgot-password"
+          >
+
+            Esqueceu sua senha?
+
+          </a>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             BOTÃO LOGIN
+        =================================================== -->
+
+        <button
+          id="loginButton"
+          class="login-button"
+          type="submit"
+        >
+
+          Entrar no Painel
+
+        </button>
+
+
+
+        <!-- SEGURANÇA -->
+
+        <div class="security-note">
+
+          <span class="security-icon">
+
+            🔒
+
+          </span>
+
+
+          <span>
+
+            Conexão protegida • Acesso restrito
+
+          </span>
+
+        </div>
+
+
+      </form>
+
+
+
+      <!-- ==================================================
+           FOOTER
+      =================================================== -->
+
+      <footer class="footer">
+
+        Sistema de Gestão de Acervos PNLD
+        • Versão 1.0.0
+
+        &nbsp; | &nbsp;
+
+        Uso restrito a servidores autorizados do IFRN
+
+      </footer>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ========================================================
+       TOAST
+  ========================================================= -->
+
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+
+  <!-- ========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+  <script>
+
+
+    /* ========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const identifier =
+      document.getElementById("identifier");
+
+    const password =
+      document.getElementById("password");
+
+    const togglePassword =
+      document.getElementById("togglePassword");
+
+    const errorAlert =
+      document.getElementById("errorAlert");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const remember =
+      document.getElementById("remember");
+
+    const forgotPassword =
+      document.getElementById("forgotPassword");
+
+    const toast =
+      document.getElementById("toast");
+
+
+
+    /* ========================================================
+       MOSTRAR / OCULTAR SENHA
+    ========================================================= */
+
+    togglePassword.addEventListener(
+      "click",
+      () => {
+
+        const senhaVisivel =
+          password.type === "text";
+
+
+        if (senhaVisivel) {
+
+          password.type = "password";
+
+          togglePassword.textContent = "👁";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Exibir senha"
+          );
+
+        } else {
+
+          password.type = "text";
+
+          togglePassword.textContent = "🙈";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Ocultar senha"
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /* ========================================================
+       VALIDAR MATRÍCULA / EMAIL
+    ========================================================= */
+
+    function validarIdentificador(valor) {
+
+      const texto =
+        valor.trim();
+
+
+      if (!texto) {
+
+        return false;
+
+      }
+
+
+      /*
+        Matrícula:
+        aceita de 10 a 14 números.
+      */
+
+      const matricula =
+        /^\d{10,14}$/;
+
+
+      /*
+        E-mail:
+        aceita @ifrn.edu.br
+        ou @escolar.ifrn.edu.br
+      */
+
+      const email =
+        /^[^\s@]+@(?:ifrn\.edu\.br|escolar\.ifrn\.edu\.br)$/i;
+
+
+      return (
+        matricula.test(texto) ||
+        email.test(texto)
+      );
+
+    }
+
+
+
+    /* ========================================================
+       FEEDBACK DO CAMPO
+    ========================================================= */
+
+    identifier.addEventListener(
+      "input",
+      () => {
+
+        identifier.classList.remove(
+          "invalid"
+        );
+
+
+        if (
+          identifier.value.trim()
+        ) {
+
+          if (
+            validarIdentificador(
+              identifier.value
+            )
+          ) {
+
+            identifier.classList.add(
+              "valid"
+            );
+
+          } else {
+
+            identifier.classList.add(
+              "invalid"
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+    password.addEventListener(
+      "input",
+      () => {
+
+        password.classList.remove(
+          "invalid"
+        );
+
+      }
+    );
+
+
+
+    /* ========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(
+      mensagem
+    ) {
+
+      toast.textContent =
+        mensagem;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      setTimeout(
+        () => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },
+        3500
+      );
+
+    }
+
+
+
+    /* ========================================================
+       MOSTRAR ERRO
+    ========================================================= */
+
+    function mostrarErroLogin() {
+
+      errorAlert.classList.add(
+        "show"
+      );
+
+
+      identifier.classList.add(
+        "invalid"
+      );
+
+
+      password.classList.add(
+        "invalid"
+      );
+
+
+      showToast(
+        "Credenciais inválidas."
+      );
+
+    }
+
+
+
+    /* ========================================================
+       LIMPAR ERRO
+    ========================================================= */
+
+    function limparErro() {
+
+      errorAlert.classList.remove(
+        "show"
+      );
+
+
+      identifier.classList.remove(
+        "invalid"
+      );
+
+
+      password.classList.remove(
+        "invalid"
+      );
+
+    }
+
+
+
+    /* ========================================================
+       LOGIN
+    ========================================================= */
+
+    loginForm.addEventListener(
+      "submit",
+      event => {
+
+        /*
+          Impede o navegador de recarregar
+          a página.
+        */
+
+        event.preventDefault();
+
+
+        limparErro();
+
+
+        const usuario =
+          identifier.value.trim();
+
+
+        const senha =
+          password.value;
+
+
+
+        /* ==============================================
+           VALIDAR USUÁRIO
+        =============================================== */
+
+        if (
+          !validarIdentificador(
+            usuario
+          )
+        ) {
+
+          identifier.classList.add(
+            "invalid"
+          );
+
+
+          showToast(
+            "Informe uma matrícula ou e-mail institucional válido."
+          );
+
+
+          identifier.focus();
+
+
+          return;
+
+        }
+
+
+
+        /* ==============================================
+           VALIDAR SENHA
+        =============================================== */
+
+        if (!senha) {
+
+          password.classList.add(
+            "invalid"
+          );
+
+
+          showToast(
+            "Informe sua senha."
+          );
+
+
+          password.focus();
+
+
+          return;
+
+        }
+
+
+
+        /* ==============================================
+           SIMULAR LOGIN
+        =============================================== */
+
+        loginButton.classList.add(
+          "loading"
+        );
+
+
+        loginButton.textContent =
+          "Verificando...";
+
+
+
+        setTimeout(
+          () => {
+
+
+            /*
+              SENHA TEMPORÁRIA PARA TESTE:
+
+              123456
+
+              Depois vamos remover isso
+              quando conectar ao backend.
+            */
+
+            if (
+              senha !== "123456"
+            ) {
+
+              mostrarErroLogin();
+
+
+              loginButton.classList.remove(
+                "loading"
+              );
+
+
+              loginButton.textContent =
+                "Entrar no Painel";
+
+
+              password.value = "";
+
+
+              password.focus();
+
+
+              return;
+
+            }
+
+
+
+            /* ==========================================
+               LOGIN CORRETO
+            =========================================== */
+
+            if (
+              remember.checked
+            ) {
+
+              localStorage.setItem(
+                "acervo_login_identifier",
+                usuario
+              );
+
+            } else {
+
+              localStorage.removeItem(
+                "acervo_login_identifier"
+              );
+
+            }
+
+
+
+            showToast(
+              "Login realizado com sucesso!"
+            );
+
+
+            /*
+              REDIRECIONAMENTO FUTURO:
+
+              window.location.href =
+                "dashboard.html";
+            */
+
+
+            setTimeout(
+              () => {
+
+                /*
+                  Por enquanto deixei apenas
+                  um alerta no console.
+
+                  Quando seu dashboard estiver
+                  pronto, coloque:
+
+                  window.location.href =
+                  "dashboard.html";
+                */
+
+                console.log(
+                  "Login autorizado."
+                );
+
+
+                loginButton.classList.remove(
+                  "loading"
+                );
+
+
+                loginButton.textContent =
+                  "Entrar no Painel";
+
+              },
+              800
+            );
+
+
+          },
+          700
+        );
+
+      }
+    );
+
+
+
+    /* ========================================================
+       ESQUECEU A SENHA
+    ========================================================= */
+
+    forgotPassword.addEventListener(
+      "click",
+      event => {
+
+        event.preventDefault();
+
+
+        showToast(
+          "O fluxo de recuperação será enviado para o e-mail institucional."
+        );
+
+      }
+    );
+
+
+
+    /* ========================================================
+       LEMBRAR MATRÍCULA
+    ========================================================= */
+
+    const savedIdentifier =
+      localStorage.getItem(
+        "acervo_login_identifier"
+      );
+
+
+    if (
+      savedIdentifier
+    ) {
+
+      identifier.value =
+        savedIdentifier;
+
+
+      remember.checked =
+        true;
+
+
+      identifier.classList.add(
+        "valid"
+      );
+
+    }
+
+
+
+    /*
+      ========================================================
+      ACESSIBILIDADE
+
+      O formulário utiliza elementos HTML semânticos.
+
+      TAB:
+      navega entre os campos.
+
+      ENTER:
+      envia o formulário.
+
+      ESC:
+      não possui ação porque não existe
+      modal nessa tela.
+      ========================================================
+    */
+
+
+  </script>
+
+</body>
+
+</html>

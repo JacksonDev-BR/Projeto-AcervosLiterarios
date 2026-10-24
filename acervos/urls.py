@@ -1,6 +1,7 @@
 from django.urls import path
-from acervos.views import index 
+from . import views
 
 urlpatterns = [
-    path('', index),
+    path('', views.listar_tarefas, name='listar_tarefas'),
+    path('acervos/nova/', views.dasshboard, name='dasshboard')
 ]

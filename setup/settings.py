@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'acervos',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
@@ -117,8 +118,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
+# Não é necessário usar STATICFILES_DIRS quando todos os arquivos estáticos
+# estão isolados dentro das pastas de seus respectivos apps.
+
+STATICFILES_DIRS = [BASE_DIR]
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
