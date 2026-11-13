@@ -17,8 +17,8 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 ### 1. Clonar o repositório
 Abra o terminal e execute o comando abaixo para baixar o projeto:
 ```bash
-git clone [https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git](https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git)
-cd NOME-DO-REPOSITORIO
+git clone https://github.com/JacksonDev-BR/Projeto-AcervosLiterarios.git
+cd Projeto-AcervosLiterarios
 
 ```
 
