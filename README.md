@@ -56,11 +56,17 @@ pip install -r requirements.txt
 ### 4. Configurar as Variáveis de Ambiente (`.env`)
 
 Na raiz do projeto (ao lado do arquivo `manage.py`), crie um arquivo chamado `.env` e adicione a chave secreta do Django:
+Markdown
 
-```env
-SECRET_KEY=sua-chave-secreta-aqui
+Gere uma chave secreta segura executando o comando abaixo no terminal (com a `venv` ativa):
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+Em seguida, crie um arquivo chamado .env na raiz do projeto (ao lado do arquivo manage.py) e cole a chave gerada:
+
+Snippet de código
+SECRET_KEY=cole-aqui-a-chave-gerada-no-terminal
 DEBUG=True
-
 ```
 
 ### 5. Executar as Migrações do Banco de Dados
