@@ -54,6 +54,7 @@ pip install -r requirements.txt
 ```
 
 ### 4. Configurar as Variáveis de Ambiente (`.env`)
+Não obrigatório Agora!!!
 
 Na raiz do projeto (ao lado do arquivo `manage.py`), crie um arquivo chamado `.env` e adicione a chave secreta do Django:
 Markdown
